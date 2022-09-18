@@ -11,6 +11,7 @@ app.use(express.json())
 
 app.use(`${prefix}/${routePath}`, travelsApi)
 
-app.listen(3000, () => {
-  console.log('Server successfully running on port', getEnvironmentVariable('PORT'))
+const port = getEnvironmentVariable('PORT') ?? 3001
+app.listen(port, () => {
+  console.log(`Server successfully running on port ${port}}!!!`)
 })

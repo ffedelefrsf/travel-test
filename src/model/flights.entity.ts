@@ -20,7 +20,7 @@ export class Flights extends AbstractEntity { // eslint-disable-line
   destination: SupportedDestinations
 
   @Column({ type: 'enum', enum: SupportedFlightStatus, default: SupportedFlightStatus.PENDING, nullable: false })
-  delayed: SupportedFlightStatus
+  status: SupportedFlightStatus
 
   @ManyToOne(() => Planes, plane => plane.flights, { onDelete: 'CASCADE', nullable: false })
   plane: Planes

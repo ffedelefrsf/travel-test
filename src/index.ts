@@ -10,11 +10,11 @@ import planesApi, { routePath as planesRoutePath } from './controllers/planes'
 import ticketsApi, { routePath as ticketsRoutePath } from './controllers/tickets'
 import { SupportedHttpStatusses } from './enums'
 
-configEnvironment()
+export const prefix = '/api'
+
+const server = configEnvironment()
   .then(() => {
     const app = express()
-
-    const prefix = '/api'
 
     app.use(express.json())
 
@@ -31,10 +31,12 @@ configEnvironment()
     })
 
     const port = getEnvironmentVariable('PORT') ?? 3001
-    app.listen(port, () => {
+    return app.listen(port, () => {
       console.log(`Server successfully running on port ${port}}!!!`)
     })
   })
   .catch((error: any) => {
     console.log('error', error)
   })
+
+export default server

@@ -8,6 +8,6 @@ export class Pilots extends People { // eslint-disable-line
   @Column({ type: 'enum', enum: SupportedPilotsExperiences, nullable: false, default: SupportedPilotsExperiences.BEGINNER })
   experience: SupportedPilotsExperiences
 
-  @OneToMany(() => Flights, flight => flight.plane)
+  @OneToMany(() => Flights, flight => flight.plane, { cascade: ['insert', 'update'] })
   flights: Flights[]
 }

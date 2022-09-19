@@ -19,7 +19,7 @@ export const dataSource = new DataSource({
   password: getEnvironmentVariable('DATABASE_PASSWORD'),
   database: getEnvironmentVariable('DATABASE_NAME'),
   entities: ['src/model/*.entity.ts'],
-  logging: getEnvironmentVariable('NODE_ENV') === 'developmenta',
+  logging: getEnvironmentVariable('NODE_ENV') === 'development',
   synchronize: true,
   namingStrategy: new SnakeNamingStrategy()
 })

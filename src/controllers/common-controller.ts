@@ -60,14 +60,14 @@ const CommonController = <Entity extends ObjectLiteral>(router: Router, target: 
   })
 
   // GET BY ID
-  router.get(':id', (req, res) => {
+  router.get('/:id', (req, res) => {
     const id: string = req.params.id
     if (id === '' || id === undefined) {
       sendResponse(res, SupportedHttpStatusses.BAD_REQUEST, undefined, 'Missing id param.')
     }
     findById(target, id as FindOptionsWhereProperty<NonNullable<Entity[string]>>)
       .then(result => {
-        if (result !== undefined) {
+        if (result !== undefined && result !== null) {
           sendResponse(res, SupportedHttpStatusses.OK, result)
         } else {
           sendResponse(res, SupportedHttpStatusses.NOT_FOUND)
@@ -84,7 +84,7 @@ const CommonController = <Entity extends ObjectLiteral>(router: Router, target: 
     delete body.id
     create(target, body)
       .then(result => {
-        if (result !== undefined) {
+        if (result !== undefined && result !== null) {
           sendResponse(res, SupportedHttpStatusses.CREATED, result)
         } else {
           sendResponse(res, SupportedHttpStatusses.BAD_REQUEST, undefined)
@@ -96,15 +96,15 @@ const CommonController = <Entity extends ObjectLiteral>(router: Router, target: 
   })
 
   // UPDATE BY ID
-  router.put(':id', (req, res) => {
+  router.put('/:id', (req, res) => {
     const { id } = req.params
-    if (id === '' || id === undefined) {
+    const body = req.body
+    if (id === '' || id === undefined || Object.keys(body).length === 0) {
       sendResponse(res, SupportedHttpStatusses.BAD_REQUEST, undefined, 'Missing id param.')
     }
-    const body = req.body
     updateById(target, id, body)
       .then(result => {
-        if (result !== undefined) {
+        if (result !== undefined && result !== null) {
           sendResponse(res, SupportedHttpStatusses.OK, result)
         } else {
           sendResponse(res, SupportedHttpStatusses.BAD_REQUEST, undefined)

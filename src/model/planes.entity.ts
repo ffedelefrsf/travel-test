@@ -14,6 +14,6 @@ export class Planes extends AbstractEntity { // eslint-disable-line
   @Column({ type: 'tinyint', nullable: false })
   passengerCapacity: number
 
-  @OneToMany(() => Flights, flight => flight.plane)
+  @OneToMany(() => Flights, flight => flight.plane, { cascade: ['insert', 'update'] })
   flights: Flights[]
 }

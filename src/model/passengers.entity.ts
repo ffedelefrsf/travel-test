@@ -8,6 +8,9 @@ export class Passengers extends People { // eslint-disable-line
   @Column({ nullable: false, length: 50 })
   email: string
 
+  @Column({ nullable: true, length: 255 })
+  profilePictureName: string
+
   @OneToMany(() => Tickets, ticket => ticket.passenger)
   tickets: Tickets[]
 
